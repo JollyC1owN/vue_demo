@@ -1,14 +1,21 @@
 <template>
   <ul class="todo-main">
-    <todoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <todoItem
+      v-for="(todo,index) in todos"
+      :key="todo.id"
+      :todo="todo"
+      :deleteTodos="deleteTodos"
+      :updateTodos="updateTodos"
+      :index="index"
+    />
   </ul>
 </template>
 
 <script>
-import todoItem from './todoItem.vue'
+import todoItem from './todoItem'
 export default {
+  props: ['todos', 'deleteTodos', 'updateTodos'],
   name: 'todoList',
-  props: ['todos'],
   components: {
     todoItem
   }

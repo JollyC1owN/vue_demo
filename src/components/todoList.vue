@@ -4,17 +4,17 @@
       v-for="(todo,index) in todos"
       :key="todo.id"
       :todo="todo"
+      :deleteTodos="deleteTodos"
+      :updateTodos="updateTodos"
       :index="index"
-      :deleteTodo="deleteTodo"
-      :updateTodo="updateTodo"
     />
   </ul>
 </template>
 
 <script>
-import todoItem from './todoItem.vue'
+import todoItem from './todoItem'
 export default {
-  props: ['todos', 'deleteTodo', 'updateTodo'],
+  props: ['todos', 'deleteTodos', 'updateTodos'],
   name: 'todoList',
   components: {
     todoItem
