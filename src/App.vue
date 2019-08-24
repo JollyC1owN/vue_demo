@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <todoHeader :todos="todos" :addTodo="addTodo" />
       <todoList :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
-      <todoFooter :todos="todos" />
+      <todoFooter :todos="todos" :selectAll="selectAll" />
     </div>
   </div>
 </template>
@@ -29,11 +29,17 @@ export default {
     addTodo(todo) {
       this.todos.unshift(todo)
     },
+
     deleteTodo(index) {
       this.todos.splice(index, 1)
     },
+
     updateTodo(todo, isShow) {
       todo.isShow = isShow
+    },
+    /* 可能为全选，也可能为全不选 */
+    selectAll(isCheck) {
+      this.todos.forEach(todo => (todo.isShow = isCheck))
     }
   },
   components: {
