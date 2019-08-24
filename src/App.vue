@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <todoHeader :todos="todos" :addTodo="addTodo" />
       <todoList :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo" />
-      <todoFooter :todos="todos" :selectAll="selectAll" />
+      <todoFooter :todos="todos" :selectAll="selectAll" :deleteCompeleted="deleteCompeleted" />
     </div>
   </div>
 </template>
@@ -17,12 +17,7 @@ export default {
   name: 'App',
   data() {
     return {
-      todos: [
-        { id: 1, title: '奔驰', isShow: true },
-        { id: 2, title: '奥迪', isShow: false },
-        { id: 3, title: '领克', isShow: false },
-        { id: 4, title: '吉利', isShow: false }
-      ]
+      todos: JSON.parse(localStorage.getItem('todos_key') || '[]')
     }
   },
   methods: {
@@ -40,6 +35,20 @@ export default {
     /* 可能为全选，也可能为全不选 */
     selectAll(isCheck) {
       this.todos.forEach(todo => (todo.isShow = isCheck))
+    },
+    // 清空已完成的任务
+    deleteCompeleted() {
+      this.todos = this.todos.filter(todo => !todo.isShow)
+    }
+  },
+  watch: {
+    // 该回调会在任何被侦听的对象的 property 改变时被调用，不论其被嵌套多深
+    todos: {
+      deep: true, // 是否为深度克隆
+      handler: function(value) {
+        // 将数据保存在localStorage中，数据要是json的格式
+        localStorage.setItem('todos_key', JSON.stringify(value))
+      }
     }
   },
   components: {

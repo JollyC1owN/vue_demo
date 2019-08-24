@@ -7,7 +7,7 @@
       <span>已完成{{completedCount}}</span>
       / 全部{{todos.length}}
     </span>
-    <button class="btn btn-danger" v-if="completedCount">清除已完成任务</button>
+    <button class="btn btn-danger" v-if="completedCount" @click="deleteCompeleted">清除已完成任务</button>
   </div>
 </template>
 
@@ -15,7 +15,8 @@
 export default {
   props: {
     todos: Array,
-    selectAll: Function
+    selectAll: Function,
+    deleteCompeleted: Function
   },
   name: 'todoFooter',
   computed: {
