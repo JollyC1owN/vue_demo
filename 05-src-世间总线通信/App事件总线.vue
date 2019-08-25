@@ -3,22 +3,7 @@
     <div class="todo-wrap">
       <todoHeader :addTodos="addTodos" />
       <todoList :todos="todos" :deleteTodos="deleteTodos" :updateTodos="updateTodos" />
-      <todoFooter :todos="todos" :todosCompelted="todosCompelted" :delAllTodo="delAllTodo">
-        <!-- 给要提取为插槽的起个名字：具名插槽 -->
-        <label slot="left">
-          <input type="checkbox" v-model="isCheckAll" />
-        </label>
-        <span slot="conter">
-          <span>已完成{{compeledCount}}</span>
-          / 全部{{todos.length}}
-        </span>
-        <button
-          slot="right"
-          class="btn btn-danger"
-          @click="delAllTodo()"
-          v-show="compeledCount"
-        >清除已完成任务</button>
-      </todoFooter>
+      <todoFooter :todos="todos" :todosCompelted="todosCompelted" :delAllTodo="delAllTodo" />
     </div>
   </div>
 </template>
@@ -41,6 +26,13 @@ export default {
       // ]
     }
   },
+  mounted() {
+    // 通过实例化对象执行事件绑定
+    // 事件总线通信第二步
+    this.$bus.$on('updateTodos', (todo, isCompeled) => {
+      this.updateTodos(todo, isCompeled)
+    })
+  },
   methods: {
     // 当用户在输入框中输入后，按下enter键后添加
     addTodos(todo) {
@@ -61,34 +53,6 @@ export default {
     // 清除已完成的任务 筛选出isCompeled为false的，把为true的去掉
     delAllTodo() {
       this.todos = this.todos.filter(todo => !todo.isCompeled)
-    }
-  },
-  computed: {
-    // 选中的数量计算
-    compeledCount() {
-      // 调用reduce()，来实现累加计算
-      return this.todos.reduce(
-        // 当每一项的isCompeled为true时，则就加1
-        (pre, todo) => pre + (todo.isCompeled ? 1 : 0),
-        0
-      )
-    },
-    // 点击全选按钮的操作
-    // 当点击时，上面所有的都得勾选，是get操作
-    // 当用户把上面的每一项都点击后，下面的也应该勾选
-    isCheckAll: {
-      get() {
-        return (
-          // 判断当前选中的个数，是否与todos的数据个数相等
-          // 若选中个数为0，todos中的个数也为0时，条件this.compeledCount === this.todos.length成立
-          // 所以我们加一个限制条件 this.compeledCount > 0，当两个条件都满足时才会返回true
-          this.compeledCount === this.todos.length && this.compeledCount > 0
-        )
-      },
-      set(value) {
-        // 调用app中定义的方法，实现每一个todo的状态都为true
-        this.todosCompelted(value)
-      }
     }
   },
   watch: {
