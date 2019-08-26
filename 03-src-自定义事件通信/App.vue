@@ -2,7 +2,9 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <!--通信方式： 自定义事件 -->
-      <todoHeader @addTodos="addTodos" />
+      <!-- <todoHeader @addTodos="addTodos" /> -->
+      <!-- 通过ref标识一个组件对象 -->
+      <todoHeader ref="header" />
       <todoList :todos="todos" :deleteTodos="deleteTodos" :updateTodos="updateTodos" />
       <todoFooter :todos="todos" :todosCompelted="todosCompelted" :delAllTodo="delAllTodo" />
     </div>
@@ -26,6 +28,10 @@ export default {
       //   { id: 4, title: 'darling', isCompeled: true }
       // ]
     }
+  },
+  mounted() {
+    // 通过ref来给组件对象绑定事件
+    this.$refs.header.$on('addTodos', this.addTodos)
   },
   methods: {
     // 当用户在输入框中输入后，按下enter键后添加
