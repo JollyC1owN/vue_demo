@@ -2,11 +2,10 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import axios from 'axios'
+import VueResource from 'vue-resource'
 Vue.config.productionTip = false
-
-Vue.prototype.$bus = new Vue()
-Vue.prototype.$axios = axios
+// 声明使用插件
+Vue.use(VueResource) // 内部给Vue.prototype.$http = 能发ajax请求的对象（.get/.post）
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
