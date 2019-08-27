@@ -1,4 +1,5 @@
-## 1. vue脚手架
+## 1. vue 脚手架
+
     用来创建vue项目的工具包
     创建项目:
         npm install -g vue-cli
@@ -13,13 +14,14 @@
         serve dist
         http://localhost:5000
 
-
 ## 2. eslint
+
     用来做项目编码规范检查的工具
     基本原理: 定义了很多规则, 检查项目的代码一旦发现违背了某个规则就输出相应的提示信息
     有相应的配置, 可定制检查
 
-## 3. vue组件单文件的组成
+## 3. vue 组件单文件的组成
+
     <template>
       <div></div>
     </template>
@@ -39,20 +41,23 @@
     <style>
     </style>
 
-## 4. 组件化编码的3大步
+## 4. 组件化编码的 3 大步
+
     1). 拆分组件
     2). 静态组件
     3). 动态组件
       a. 动态初始化显示
       b. 交互
 
-## 5. 设计data数据
+## 5. 设计 data 数据
+
     数据类型?  数组
     数据名称?  todos
     数据保存在哪个组件?   看是哪个组件还是哪些组件?
     将更新数据的方法定义在哪个组件?   数据在哪方法就定义在哪
 
 ## 6. 组件间通信
+
     0). 组件通信的5种方式
         props
         vue的自定义事件
@@ -93,12 +98,14 @@
             a. 事件名/类型
             b. 回调函数: 在分发事件时执行, 可以接收到传递的数据
         触发/分发事件
-            原生: 当用户对标签元素的界面做特定操作时, 浏览器会自动分发对应名称的事件, 
+            原生: 当用户对标签元素的界面做特定操作时, 浏览器会自动分发对应名称的事件,
                 并根据操作封装包含所有相关信息数据的对象event
             自定义的: 必须执行特定的分发事件的代码: dispatch/emit('xxx', data)
             a. 事件名/类型
             b. 数据
+
 ## 7. ajax
+
     相关库:
         vue-resource: vue插件, 多用于vue1.x
         axios: 第三方库, 多用于vue2.x
@@ -106,7 +113,8 @@
         mounted(): 打开界面后自动显示
         事件回调函数: 用户做特定操作后
 
-## 8. vue UI组件库
+## 8. vue UI 组件库
+
     常用的UI组件库
         PC: Element / iview /
         Mobile: mint-ui / cube-ui
@@ -115,6 +123,7 @@
         按需打包
 
 ## 9. vue-router
+
     vue用来实现SPA的vue插件
     使用vue-router
         1. 创建路由器: router/index.js
@@ -173,15 +182,16 @@
         this.$router.back(): 请求(返回)上一个记录路由
 
 ## 10. 自定义全局事件总线: mini-event-bus
-	1). eventBus: 事件总线是一个对象, 是组件间进行通信的共用桥梁, 它包含了用于通信的方法
-	2). eventBus的方法
-		on(eventName, listener): 绑定事件监听---保存监听回调
-		emit(eventName, data): 分发事件---触发所有对应的监听回调调用, 并传入data
-		off(eventName): 解绑事件监听---移除对应的所有监听回调
-	3). 内部存储listener的容器数据结构:
-		{
-			eventName1: [listener1, listener2],
-			eventName2: [listener3]
-		}
 
-## 
+    1). eventBus: 事件总线是一个对象, 是组件间进行通信的共用桥梁, 它包含了用于通信的方法
+    2). eventBus的方法
+    	on(eventName, listener): 绑定事件监听---保存监听回调
+    	emit(eventName, data): 分发事件---触发所有对应的监听回调调用, 并传入data
+    	off(eventName): 解绑事件监听---移除对应的所有监听回调
+    3). 内部存储listener的容器数据结构:
+    	{
+    		eventName1: [listener1, listener2],
+    		eventName2: [listener3]
+    	}
+
+##

@@ -6,6 +6,10 @@
         <router-link :to="`/home/message/detail/${msg.id}`">{{msg.title}}</router-link>
         <!-- 通过query的形式 -->
         <!-- <router-link :to="`/home/message/detail/?id=${msg.id}`">{{msg.title}}</router-link> -->
+        ---
+        <button @click="pushClick(msg.id)">push查看</button>
+        -----
+        <button @click="replaceClick(msg.id)">replace查看</button>
       </li>
     </ul>
     <router-view></router-view>
@@ -32,6 +36,16 @@ export default {
       ]
       this.message = messages
     }, 900)
+  },
+  methods: {
+    // push查看----编程式路由跳转
+    pushClick(id) {
+      this.$router.push(`/home/message/detail/${id}`)
+    },
+    // replace查看---编程式路由跳转
+    replaceClick(id) {
+      this.$router.replace(`/home/message/detail/${id}`)
+    }
   },
   components: {
     MessageDetail
