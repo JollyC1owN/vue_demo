@@ -1,5 +1,5 @@
 export default {
-  firstView: true,
+  viewFirst: true,
   loading: false,
   users: [],
   errorMsg: ''

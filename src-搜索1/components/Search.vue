@@ -2,8 +2,8 @@
   <section class="jumbotron">
     <h3 class="jumbotron-heading">Search Github Users</h3>
     <div>
-      <input type="text" placeholder="enter the name you search" v-model="searchText" />
-      <button @click="searchUsers">Search</button>
+      <input type="text" placeholder="enter the name you search" v-model="searchContext" />
+      <button @click="search ">Search</button>
     </div>
   </section>
 </template>
@@ -13,15 +13,13 @@ export default {
   name: 'Search',
   data() {
     return {
-      searchText: ''
+      searchContext: ''
     }
   },
   methods: {
-    searchUsers() {
-      const searchText = this.searchText.trim()
-      if (searchText) {
-        this.$store.dispatch('search', searchText)
-      }
+    search() {
+      const searchContext = this.searchContext.trim()
+      this.$store.dispatch('search', searchContext)
     }
   },
   components: {}

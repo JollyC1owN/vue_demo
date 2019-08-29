@@ -1,18 +1,21 @@
 <template>
   <div class="container">
     <Search />
-    <List />
+    <Main />
   </div>
 </template>
 
 <script>
-import Search from './components/Search'
-import List from './components/List'
+import Main from './components/Main.vue'
+import Search from './components/Search.vue'
 export default {
   name: 'App',
+  data() {
+    return {}
+  },
   components: {
-    Search,
-    List
+    Main,
+    Search
   }
 }
 </script>
